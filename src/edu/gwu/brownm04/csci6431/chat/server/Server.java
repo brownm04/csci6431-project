@@ -21,9 +21,11 @@ public class Server {
 					new ClientThread(serverSocket.accept()).start();
 				}
 			} catch (IOException e) {
+				System.err.println("Problem accepting a client connection.");
 				serverSocket.close();
 			}
 		} catch (IOException e) {
+			System.err.println("Could not start the server listening on port " + portNumber);
 			e.printStackTrace();
 		}
 	}

@@ -29,6 +29,7 @@ public class Client {
 						try {
 							socket.close();
 						} catch (IOException e1) {
+							System.err.println("Error closing socket after error from standard in.");
 							e1.printStackTrace();
 						}
 					}
@@ -47,12 +48,14 @@ public class Client {
 						try {
 							socket.close();
 						} catch (IOException e1) {
+							System.err.println("Error closing socket after connection reset from server.");
 							e1.printStackTrace();
 						}
 					}
 				}
 			}.start();
 		} catch (IOException e) {
+			System.err.println("Error connecting to server on port 4567, server may not be listening.");
 			e.printStackTrace();
 		}
 	}

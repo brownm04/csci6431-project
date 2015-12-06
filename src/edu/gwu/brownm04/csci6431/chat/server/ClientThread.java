@@ -49,7 +49,7 @@ public class ClientThread extends Thread {
 			out = new PrintWriter(socket.getOutputStream(), true);
 			in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 			
-			out.println("Welcome to the chat server.");
+			out.println("Welcome to the chat server. Your ID is " + getName());
 			
 			/* handle the incoming stream from the client */
 			new Thread() {
@@ -60,6 +60,7 @@ public class ClientThread extends Thread {
 							ClientThreadMessageHandler.broadcastMessage(ClientThread.this, fromClient);
 						}
 					} catch (IOException e) {
+						System.out.println("AAAAH");
 						/* remote closed connection, remove from broadcast pool and clean up */
 						ClientThreadMessageHandler.removeClient(ClientThread.this);
 						
@@ -69,6 +70,7 @@ public class ClientThread extends Thread {
 						try {
 							ClientThread.this.socket.close();
 						} catch (IOException e1) {
+							System.err.println("Problem closing the socket for client " + ClientThread.this.getName());
 							e1.printStackTrace();
 						}
 					}
