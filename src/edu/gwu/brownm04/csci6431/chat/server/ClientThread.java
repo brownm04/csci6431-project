@@ -60,7 +60,6 @@ public class ClientThread extends Thread {
 							ClientThreadMessageHandler.broadcastMessage(ClientThread.this, fromClient);
 						}
 					} catch (IOException e) {
-						System.out.println("AAAAH");
 						/* remote closed connection, remove from broadcast pool and clean up */
 						ClientThreadMessageHandler.removeClient(ClientThread.this);
 						
